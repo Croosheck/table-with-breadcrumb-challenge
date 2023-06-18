@@ -24,11 +24,12 @@ function createInitialState() {
 }
 function createReducers() {
 	return {
-		// exampleAction: (state, { payload }) => {
-		// 	state.exampleState = payload.map((item) => ({
-		// 		...item,
-		// 	}));
-		// },
+		useDataSet: (state, { payload }) => {
+			state.currentData = [...payload];
+		},
+		clearData: (state) => {
+			state.currentData = [];
+		},
 	};
 }
 function createExtraReducers(thunk) {
@@ -44,6 +45,6 @@ function createExtraReducers(thunk) {
 	};
 }
 
-export const {} = tableSlice.actions;
+export const { useDataSet, clearData } = tableSlice.actions;
 
 export default tableSlice.reducer;

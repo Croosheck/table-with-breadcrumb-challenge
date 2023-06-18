@@ -1,0 +1,32 @@
+.landing-container {
+	min-width: 100dvw;
+	min-height: 100dvh;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.landing-menu-box {
+	padding: 20px 10px;
+	display: flex;
+	gap: 10px;
+	/* border: 1px solid white; */
+	scale: 1.5;
+}
+
+.landing-dataset {
+	padding: 10px 20px;
+	border: 1px solid white;
+	cursor: pointer;
+	text-decoration: none;
+	color: white;
+	border-radius: 10px;
+	min-width: 100px;
+	text-align: center;
+	transition: all ease-in-out 0.2s;
+
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.177);
+	}
+}

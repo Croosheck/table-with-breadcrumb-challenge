@@ -1,0 +1,42 @@
+.table--data-row {
+	cursor: pointer;
+	transition: all ease-in-out 0.2s;
+
+	&:hover {
+		background-color: #555555;
+	}
+}
+
+.active--row {
+	background-color: rgba(13, 8, 18, 0.833) !important;
+}
+
+.active--row--container {
+	display: flex;
+	gap: 4%;
+	cursor: default;
+
+	> img {
+		width: 30dvw;
+		max-width: 200px;
+		border-radius: 20px;
+		border: 2px solid rgb(197, 197, 197);
+		box-shadow: 2px 2px 8px rgba(255, 255, 255, 0.5);
+		scale: 0.95;
+		transition: all ease-in-out 0.2s;
+
+		&:hover {
+			scale: 1;
+		}
+	}
+
+	.active-row--details-box {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+
+		> p {
+			text-align: start;
+		}
+	}
+}

@@ -1,0 +1,56 @@
+.record-details--container {
+	/* border: 2px solid rgb(183, 255, 0); */
+
+	min-width: 100dvw;
+	min-height: 100dvh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+}
+.record-details--inner-box {
+	--translate-transition: 0.2s;
+	/* filter: drop-shadow(2px 2px 3px white); */
+	box-shadow: 2px 2px 15px rgba(255, 255, 255, 0.236);
+
+	border: 5px solid rgb(78, 78, 78);
+	padding: 1.5rem;
+	border-radius: 12px;
+	transition: all ease-in-out var(--translate-transition);
+
+	> picture img {
+		border-radius: 10px;
+		transition: all ease-in-out var(--translate-transition);
+	}
+
+	&:hover {
+		padding: 1.3rem;
+	}
+
+	&:hover > picture img {
+		scale: 1.03;
+	}
+
+	> #record-details {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&:hover > #record-details {
+		translate: 0 0.3rem;
+		transition: var(--translate-transition);
+	}
+
+	&:not(:hover) > #record-details {
+		translate: 0 0;
+		transition: var(--translate-transition);
+	}
+}
+
+#record-details > p {
+	text-transform: capitalize;
+	font-family: "Courier New", Courier, monospace;
+}
