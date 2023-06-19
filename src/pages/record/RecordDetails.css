@@ -1,6 +1,4 @@
 .record-details--container {
-	/* border: 2px solid rgb(183, 255, 0); */
-
 	min-width: 100dvw;
 	min-height: 100dvh;
 	display: flex;
@@ -9,10 +7,40 @@
 	align-items: center;
 	padding: 1rem;
 }
+
+@keyframes animationBox {
+	from {
+		padding: 2.2rem;
+	}
+	to {
+		padding: 1.5rem;
+	}
+}
+@keyframes animationImg {
+	from {
+		scale: 0.8;
+		translate: 0 -40px;
+	}
+	to {
+		scale: 1.05;
+		translate: 0 0;
+	}
+}
+@keyframes animationText {
+	from {
+		translate: 0 0;
+	}
+	to {
+		translate: 0 0.5rem;
+	}
+}
+
 .record-details--inner-box {
-	--translate-transition: 0.2s;
-	/* filter: drop-shadow(2px 2px 3px white); */
+	--translate-transition: 0.5s;
+
 	box-shadow: 2px 2px 15px rgba(255, 255, 255, 0.236);
+
+	animation: animationBox var(--translate-transition) forwards;
 
 	border: 5px solid rgb(78, 78, 78);
 	padding: 1.5rem;
@@ -21,15 +49,8 @@
 
 	> picture img {
 		border-radius: 10px;
-		transition: all ease-in-out var(--translate-transition);
-	}
 
-	&:hover {
-		padding: 1.3rem;
-	}
-
-	&:hover > picture img {
-		scale: 1.03;
+		animation: animationImg var(--translate-transition) forwards;
 	}
 
 	> #record-details {
@@ -37,16 +58,8 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-	}
 
-	&:hover > #record-details {
-		translate: 0 0.3rem;
-		transition: var(--translate-transition);
-	}
-
-	&:not(:hover) > #record-details {
-		translate: 0 0;
-		transition: var(--translate-transition);
+		animation: animationText var(--translate-transition) forwards;
 	}
 }
 

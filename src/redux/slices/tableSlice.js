@@ -20,6 +20,7 @@ export const tableSlice = createSlice({
 function createInitialState() {
 	return {
 		currentData: [],
+		viewType: "table",
 	};
 }
 function createReducers() {
@@ -29,6 +30,9 @@ function createReducers() {
 		},
 		clearData: (state) => {
 			state.currentData = [];
+		},
+		detailsViewType: (state, { payload }) => {
+			state.viewType = payload;
 		},
 	};
 }
@@ -45,6 +49,6 @@ function createExtraReducers(thunk) {
 	};
 }
 
-export const { useDataSet, clearData } = tableSlice.actions;
+export const { useDataSet, clearData, detailsViewType } = tableSlice.actions;
 
 export default tableSlice.reducer;

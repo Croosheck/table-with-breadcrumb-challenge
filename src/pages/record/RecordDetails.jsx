@@ -1,6 +1,5 @@
 import "./RecordDetails.css";
 import { useParams } from "react-router-dom";
-import { DUMMY_DATA } from "../../utils/DUMMY_DATA";
 import { useEffect, useState } from "react";
 import { fetchData } from "../../helperFunctions/fetchData";
 
@@ -10,10 +9,6 @@ function RecordDetails() {
 		data: {},
 		keys: [],
 	});
-
-	// const itemData = data.find(
-	// 	(item) => item[keys[1]] === params[Object.keys(params)[1]]
-	// );
 
 	useEffect(() => {
 		async function getRecordData() {
@@ -52,7 +47,11 @@ function RecordDetails() {
 					<div className="record-details--inner-box">
 						<picture>
 							<source src={`${recordData.data[recordData.keys[4]]}`} />
-							<img src={`${recordData.data[recordData.keys[4]]}`} alt="" />
+							<img
+								src={`${recordData.data[recordData.keys[4]]}`}
+								alt="cartoon character"
+								loading="lazy"
+							/>
 						</picture>
 						<div id="record-details">
 							<p>{`${recordData.keys[1]}: ${

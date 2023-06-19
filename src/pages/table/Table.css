@@ -3,12 +3,32 @@
 	min-width: calc(100dvw - 17px);
 
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	gap: 2rem;
 
 	padding: 1rem 0 2rem 0;
 
 	user-select: none;
+
+	> button {
+		padding: 5px 12px;
+		border-radius: 15px;
+		border: none;
+		font-size: 1.1rem;
+		cursor: pointer;
+		user-select: none;
+		transition: all ease 0.15s;
+		background-color: #84b193;
+		color: #242424;
+
+		@media (min-width: 600px) {
+			&:hover {
+				scale: 1.1;
+			}
+		}
+	}
 }
 
 table {
@@ -47,6 +67,7 @@ th {
 	background-color: #0b0b0b;
 	position: sticky;
 	top: 0;
+	z-index: 1;
 }
 
 tr:nth-child(even) {

@@ -1,12 +1,16 @@
+import { useState } from "react";
 import "./Row.css";
 
 function Row({
 	onClick = () => {},
-	tableData = [],
+	tableData = {},
 	rowData = {},
 	id = Number(),
 	isActive = Boolean(),
+	type = "",
 }) {
+	const [isDeliveryVisible, setIsDeliveryVisible] = useState(false);
+
 	function onRowClickHandler() {
 		onClick();
 	}
@@ -23,15 +27,43 @@ function Row({
 				})
 			) : (
 				<td colSpan={4}>
-					<div className="active--row--container">
-						<img src={rowData.image} />
-						<div className="active-row--details-box">
-							<h3>{rowData.name}</h3>
-							<p>Species: {rowData.species}</p>
-							<p>Gender: {rowData.gender}</p>
-							<p>Status: {rowData.status}</p>
+					{type === "rickandmorty" && (
+						<div className="active--row--container">
+							<img src={rowData.image} />
+							<div className="active-row--details-box">
+								<h3>{rowData.name}</h3>
+								<p>Species: {rowData.species}</p>
+								<p>Gender: {rowData.gender}</p>
+								<p>Status: {rowData.status}</p>
+							</div>
 						</div>
-					</div>
+					)}
+
+					{type === "jokes" && (
+						<div className="active--row--container">
+							<div className="active-row--details-box">
+								{rowData.type === "single" && (
+									<p id="single-joke">{rowData.joke}</p>
+								)}
+								{rowData.type === "twopart" && (
+									<div>
+										<p>{rowData.setup}</p>
+
+										{isDeliveryVisible ? (
+											<p>{rowData.delivery}</p>
+										) : (
+											<button
+												className="twopart-reveal"
+												onClick={() => setIsDeliveryVisible(true)}
+											>
+												Reveal!
+											</button>
+										)}
+									</div>
+								)}
+							</div>
+						</div>
+					)}
 				</td>
 			)}
 		</tr>

@@ -1,0 +1,17 @@
+.view-type {
+	display: flex;
+	gap: 15px;
+	justify-content: end;
+	margin-right: 25px;
+
+	> div {
+		display: flex;
+		gap: 3px;
+	}
+
+	> div > input {
+		cursor: pointer;
+		scale: 1.2;
+		margin-right: 2px;
+	}
+}

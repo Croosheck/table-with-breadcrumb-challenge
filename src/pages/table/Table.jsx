@@ -1,11 +1,10 @@
 import "./Table.css";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { DUMMY_DATA } from "../../utils/DUMMY_DATA";
 import { useEffect, useState } from "react";
-import { useDataSet } from "../../redux/slices/tableSlice";
 import { fetchData } from "../../helperFunctions/fetchData";
 import Row from "./row/Row";
+import TableViewType from "../../components/tableViewType/TableViewType";
 
 function Table() {
 	const [tableData, setTableData] = useState({
@@ -16,54 +15,59 @@ function Table() {
 		id: 0,
 	});
 
-	const dispatch = useDispatch();
+	const { viewType } = useSelector((state) => state.tableReducer);
 
 	const navigate = useNavigate();
 	const params = useParams();
 
+	async function getJokes() {
+		const data = await fetchData("https://v2.jokeapi.dev/joke/Any?amount=10");
+
+		setTableData({
+			data: data.jokes,
+			columns: ["id", "category", "type", "lang"],
+		});
+	}
+
+	async function getRickyAndMorty() {
+		const page1 = await fetchData("https://rickandmortyapi.com/api/character");
+		const allKeys = Object.keys(page1.results[0]);
+
+		setTableData({
+			data: page1.results,
+			columns: [allKeys[0], allKeys[1], allKeys[3], allKeys[2]],
+		});
+	}
+
 	useEffect(() => {
 		async function getTableData() {
-			if (params.set === "rickandmorty") {
-				const page1 = await fetchData(
-					"https://rickandmortyapi.com/api/character"
-				);
-				const allKeys = Object.keys(page1.results[0]);
-
-				setTableData({
-					data: page1.results,
-					columns: [allKeys[0], allKeys[1], allKeys[3], allKeys[2]],
-				});
-			}
-
-			// dispatch(useDataSet(page1.results));
+			if (params.set === "rickandmorty") getRickyAndMorty();
+			if (params.set === "jokes") getJokes();
 		}
 
 		getTableData();
-
-		// const data = DUMMY_DATA[params.set];
-		// const columns = Object.keys(data[0]);
-
-		// setTableData({
-		// 	data: data,
-		// 	columns: columns,
-		// });
 	}, []);
 
 	function navigateHandler(row) {
-		// navigate(`${row[tableData.columns[0]]}`);
+		if (viewType === "window" && params.set === "rickandmorty") {
+			navigate(`${row[tableData.columns[0]]}`);
+		}
 
-		setActiveRow({
-			id: row.id,
-		});
+		if (viewType === "table" || params.set === "jokes") {
+			setActiveRow({
+				id: row.id,
+			});
+		}
 	}
 
 	return (
 		<div className="table-container">
+			{params.set === "rickandmorty" && <TableViewType />}
 			<table>
 				<thead>
 					<tr>
-						{tableData.columns.map((column) => (
-							<th key={column}>{column}</th>
+						{tableData.columns.map((column, index) => (
+							<th key={column + index}>{column}</th>
 						))}
 					</tr>
 				</thead>
@@ -77,11 +81,13 @@ function Table() {
 								id={row.id}
 								rowData={row}
 								isActive={activeRow.id === row.id}
+								type={params.set}
 							/>
 						);
 					})}
 				</tbody>
 			</table>
+			{params.set === "jokes" && <button onClick={getJokes}>Shuffle</button>}
 		</div>
 	);
 }

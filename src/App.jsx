@@ -1,9 +1,10 @@
+import "./App.css";
 import { Navigate, Route, Routes } from "react-router-dom";
 import ErrorPage from "./pages/error/ErrorPage";
 import Landing from "./pages/landing/Landing";
 import Table from "./pages/table/Table";
 import RecordDetails from "./pages/record/RecordDetails";
-import Breadcrumbs from "./components/Breadcrumbs";
+import Breadcrumbs from "./components/breadcrumbs/Breadcrumbs";
 
 function App() {
 	return (

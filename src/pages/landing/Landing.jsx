@@ -1,28 +1,20 @@
 import "./Landing.css";
-import { fetchData } from "../../helperFunctions/fetchData";
 import { Link } from "react-router-dom";
+import rickandmorty from "../../assets/rickandmorty.jpg";
+import jokes from "../../assets/jokes.jpg";
 
 function Landing() {
-	async function testHandler() {
-		const page1 = await fetchData("https://rickandmortyapi.com/api/character");
-		const page2 = await fetchData(page1.info.next);
-		const page3 = await fetchData(page2.info.next);
-
-		console.log("page1", page1);
-		console.log("page2", page2);
-		console.log("page3", page3);
-	}
-
 	return (
 		<div className="landing-container">
 			<div className="landing-menu-box">
 				<Link className="landing-dataset" to={`/table/rickandmorty`}>
-					Rick & Morty
+					<p>Rick & Morty</p>
+					<img src={rickandmorty} className="theme-image" />
 				</Link>
-				<Link className="landing-dataset" to={`/table/ships`}>
-					Ships
+				<Link className="landing-dataset" to={`/table/jokes`}>
+					<p>Jokes</p>
+					<img src={jokes} className="theme-image" />
 				</Link>
-				<button onClick={testHandler}>Test</button>
 			</div>
 		</div>
 	);
